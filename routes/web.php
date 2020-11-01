@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::view('/login', 'login');
+Route::view('/posts', 'posts', ['posts' => array(
+    ['author' => 'John', 'content' => 'Hi Jane!', 'comments'=> array(
+        ['author' => 'Jane', 'content' => 'I love Computer Security']
+    )],
+    ['author' => 'Jane', 'content' => 'Hello, John!']
+)]);

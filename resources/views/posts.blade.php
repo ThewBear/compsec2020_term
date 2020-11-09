@@ -16,6 +16,27 @@
                     <div class="card-body">
                         <h3 class="card-title">{{ $post->user->name }}</h3>
                         <p class="card-text">{{ $post['content'] }}</p>
+                        @if(session('id') == $post->user->id)
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#edit-post-{{$post->id}}" aria-expanded="false" aria-controls="collapseExample">
+                            Edit this post
+                        </button>
+                        <div class="collapse" id="edit-post-{{$post->id}}">
+                            <form id="" method="POST" action="/posts" style="display: block">
+                                @csrf
+                                @method('PATCH')
+                                <label for="content">
+                                    <h3 class="m-0">Edit post</h3>
+                                </label>
+                                <div class="form-group">
+                                    {{ Form::hidden('invisible', $post->id, array('id' => 'id', 'name' => 'id')) }}
+                                    <textarea class="form-control" id="content" name="content" rows="1"
+                                        placeholder="Post content...">{{ $post['content'] }}</textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Edit</button>
+                            </form>
+                        </div>
+                        @endif
+
                         <h4>Comments</h4>
                         @isset($post->comments)
                             <section class="ml-3">

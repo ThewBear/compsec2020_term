@@ -27,5 +27,6 @@ Route::post('/login', [HomeController::class, 'doLogin']);
 
 Route::get('/posts', [PostController::class, 'showPost']);
 Route::post('/posts', [PostController::class, 'doPost']);
+Route::patch('/posts', [PostController::class, 'updatePost']);
 
 Route::post('/comment', [CommentController::class, 'doComment']);

@@ -20,6 +20,14 @@ class PostController extends Controller
         return redirect('/posts');
     }
 
+    public function updatePost(Request $request) {
+        $post = Post::findOrFail($request->id);
+        $post->content = $request->content;
+        $post->save();
+
+        return redirect('/posts');
+    }
+
     public function showPost() {
         $posts = Post::all();
 

@@ -21,7 +21,7 @@
                             <section class="ml-3">
                                 @foreach($post->comments as $comment)
                                     <h5 class="d-inline">
-                                        {{ $comment['author'] }}</h5>
+                                        {{ $comment->user->name }}</h5>
                                     <p>{{ $comment['content'] }}</p>
                                 @endforeach
                             </section>

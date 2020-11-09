@@ -31,8 +31,9 @@ class HomeController extends Controller
 
         // attempt to do the login
         if (Auth::attempt($userdata)) {
-            $name = User::select('name')->where('email', $userdata['email'])->first()['name'];
-            $request->session()->put('name', $name);
+            $userInstance = User::select(array('id', 'name'))->where('email', $userdata['email'])->first();
+            $request->session()->put('id', $userInstance['id']);
+            $request->session()->put('name', $userInstance['name']);
             // validation successful!
             // redirect them to the secure section or whatever
             // return Redirect::to('secure');

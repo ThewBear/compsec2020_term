@@ -16,16 +16,16 @@
                     <div class="card-body">
                         <h3 class="card-title">{{ $post->user->name }}</h3>
                         <p class="card-text">{{ $post['content'] }}</p>
-                        @if(session('id') == $post->user->id)
-                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#edit-post-{{$post->id}}" aria-expanded="false" aria-controls="collapseExample">
+                        @if(session('id') === $post->user->id || $isAdmin)
+                        <button class="btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#edit-post-{{$post->id}}" aria-expanded="false" aria-controls="collapseExample">
                             Edit this post
                         </button>
-                        <div class="collapse" id="edit-post-{{$post->id}}">
+                        <div class="collapse border border-info  p-3" id="edit-post-{{$post->id}}">
                             <form id="" method="POST" action="/posts" style="display: block">
                                 @csrf
                                 @method('PATCH')
                                 <label for="content">
-                                    <h3 class="m-0">Edit post</h3>
+                                    Edit post
                                 </label>
                                 <div class="form-group">
                                     {{ Form::hidden('invisible', $post->id, array('id' => 'id', 'name' => 'id')) }}
@@ -44,6 +44,25 @@
                                     <h5 class="d-inline">
                                         {{ $comment->user->name }}</h5>
                                     <p>{{ $comment['content'] }}</p>
+                                    @if(session('id') === $comment->user->id || $isAdmin)
+                                    <div>
+                                        <button class="btn btn-link btn-sm my-1" type="button" data-toggle="collapse" data-target="#edit-comment-{{$comment->id}}" aria-expanded="false" aria-controls="collapseExample">
+                                            Edit this comment
+                                        </button>
+                                        <div class="collapse border border-info my-1 p-3" id="edit-comment-{{$comment->id}}">
+                                            <form class="form-inline" method="POST" action="/comment">
+                                                @csrf
+                                                @method('PATCH')
+                                                <label class="sr-only" for="comment">Edit comment</label>
+                                                <div class="form-group flex-grow-1">
+                                                    {{Form::hidden('invisible', $comment->id, array('id' => 'comment_id', 'name' => 'comment_id')) }}
+                                                    <input class="form-control w-100" id="content" name="content" placeholder="comment..." value="{{$comment['content']}}"/>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary ml-2">Edit</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    @endif
                                 @endforeach
                             </section>
                         @endisset

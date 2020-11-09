@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Comment;
 
 class CommentController extends Controller
@@ -14,6 +15,16 @@ class CommentController extends Controller
         $comment->post_id = $request->post_id;
 
         $comment->save();
+
+        return redirect('/posts');
+    }
+
+    public function updateComment(Request $request) {
+        $comment = Comment::findOrFail($request->comment_id);
+        if (Gate::allows('update-comment', $comment)) {
+            $comment->content = $request->content;
+            $comment->save();
+        }
 
         return redirect('/posts');
     }

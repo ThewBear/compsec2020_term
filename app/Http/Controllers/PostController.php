@@ -31,6 +31,15 @@ class PostController extends Controller
         return redirect('/posts');
     }
 
+    public function deletePost(Request $request) {
+        $post = Post::findOrFail($request->id);
+        if (Gate::allows('delete-post', $post)) {
+            $post->delete();
+        }
+
+        return redirect('/posts');
+    }
+
     public function showPost()
     {
         $posts = Post::all();

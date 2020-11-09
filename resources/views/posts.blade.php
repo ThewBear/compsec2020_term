@@ -21,7 +21,7 @@
                             Edit this post
                         </button>
                         <div class="collapse border border-info  p-3" id="edit-post-{{$post->id}}">
-                            <form id="" method="POST" action="/posts" style="display: block">
+                            <form id="edit-form-post-{{$post->id}}" method="POST" action="/posts" style="display: block">
                                 @csrf
                                 @method('PATCH')
                                 <label for="content">
@@ -34,6 +34,14 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary">Edit</button>
                             </form>
+                            @if($isAdmin)
+                            <form id="delete-form-post-{{$post->id}}" method="POST" action="/posts" style="display: block">
+                                @csrf
+                                @method('DELETE')
+                                    {{ Form::hidden('invisible', $post->id, array('id' => 'id', 'name' => 'id')) }}
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                            @endif
                         </div>
                         @endif
 

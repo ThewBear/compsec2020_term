@@ -44,7 +44,7 @@
                                     <h5 class="d-inline">
                                         {{ $comment->user->name }}</h5>
                                     <p>{{ $comment['content'] }}</p>
-                                    @if(session('id') === $comment->user->id || $isAdmin)
+                                    @if(session('id') === $comment->user->id)
                                     <div>
                                         <button class="btn btn-link btn-sm my-1" type="button" data-toggle="collapse" data-target="#edit-comment-{{$comment->id}}" aria-expanded="false" aria-controls="collapseExample">
                                             Edit this comment

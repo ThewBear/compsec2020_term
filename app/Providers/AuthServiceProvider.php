@@ -30,8 +30,12 @@ class AuthServiceProvider extends ServiceProvider
             return $user->id === $post->user_id || $user->role === User::ADMIN_TYPE;
         });
 
-        Gate::define('update-comment', function ($user, $post) {
-            return $user->id === $post->user_id || $user->role === User::ADMIN_TYPE;
+        Gate::define('delete-post', function ($user, $post) {
+            return $user->role === User::ADMIN_TYPE;
+        });
+
+        Gate::define('update-comment', function ($user, $comment) {
+            return $user->id === $comment->user_id;
         });
     }
 }

@@ -7,7 +7,7 @@
     <div class="row vh-100 justify-content-center align-items-center">
         <div class="col-6">
             <h1>Please login</h1>
-            <form method="POST" action="/profile">
+            <form method="POST" action="/login">
             @csrf
             <div class="form-group">
                 <label for="email">Email</label>

@@ -6,6 +6,7 @@
 <div class="container">
     <section>
         <h1 class="my-4">All posts</h1>
+        <h2>Hello, {{session('name')}}! What's on your mind?</h2>
         @foreach($posts as $post)
             <div class="row justify-content-center">
                 <div class="col-8 card my-2">

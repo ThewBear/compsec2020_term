@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('/login', 'login');
+Route::get('/login', [HomeController::class, 'showLogin']);
+Route::post('/login', [HomeController::class, 'doLogin']);
+
 Route::view('/posts', 'posts', ['posts' => array(
     ['author' => 'John', 'content' => 'Hi Jane!', 'comments'=> array(
         ['author' => 'Jane', 'content' => 'I love Computer Security']

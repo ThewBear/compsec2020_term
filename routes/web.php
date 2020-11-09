@@ -20,6 +20,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/logout', [HomeController::class, 'doLogout']);
+
 Route::get('/login', [HomeController::class, 'showLogin']);
 Route::post('/login', [HomeController::class, 'doLogin']);
 

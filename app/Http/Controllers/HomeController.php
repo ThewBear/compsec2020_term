@@ -11,6 +11,9 @@ class HomeController extends Controller
 {
     public function showLogin()
     {
+        if (session()->has('id') && session()->has('name')) {
+            return redirect('/posts');
+        }
         return view('login');
     }
     public function doLogin(Request $request)
@@ -46,6 +49,16 @@ class HomeController extends Controller
 
         }
 
+        return view('login');
+    }
+    public function doLogout(Request $request)
+    {
+        if (session()->has('id')) {
+            session()->pull('id');
+        }
+        if (session()->has('name')) {
+            session()->pull('name');
+        }
         return view('login');
     }
 }

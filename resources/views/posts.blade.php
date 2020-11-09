@@ -30,7 +30,8 @@
                             @csrf
                             <label class="sr-only" for="comment">Write a comment</label>
                             <div class="form-group flex-grow-1">
-                                <input class="form-control w-100" id="comment" name="comment" placeholder="comment..." />
+                                {{Form::hidden('invisible', $post->id, array('id' => 'post_id', 'name' => 'post_id')) }}
+                                <input class="form-control w-100" id="content" name="content" placeholder="comment..." />
                             </div>
                             <button type="submit" class="btn btn-primary ml-2">Comment</button>
                         </form>

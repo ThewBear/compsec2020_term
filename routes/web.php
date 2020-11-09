@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,4 @@ Route::post('/login', [HomeController::class, 'doLogin']);
 Route::get('/posts', [PostController::class, 'showPost']);
 Route::post('/posts', [PostController::class, 'doPost']);
 
+Route::post('/comment', [CommentController::class, 'doComment']);

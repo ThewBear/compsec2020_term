@@ -11,21 +11,21 @@
             <div class="row justify-content-center">
                 <div class="col-8 card my-2">
                     <div class="card-body">
-                        <h3 class="card-title">{{ $post['author'] }}</h3>
+                        <h3 class="card-title">{{ $post->user->name }}</h3>
                         <p class="card-text">{{ $post['content'] }}</p>
                         <h4>Comments</h4>
-                        @isset($post['comments'])
+                        @isset($post->comments)
                             <section class="ml-3">
-                                @foreach($post['comments'] as $comment)
+                                @foreach($post->comments as $comment)
                                     <h5 class="d-inline">
                                         {{ $comment['author'] }}</h5>
                                     <p>{{ $comment['content'] }}</p>
                                 @endforeach
                             </section>
                         @endisset
-                        @empty($post['comments'])
+                        @if($post->comments->isEmpty())
                             <p>No comment yet!</p>
-                        @endempty
+                        @endif
                         <form class="form-inline" method="POST" action="/comment">
                             @csrf
                             <label class="sr-only" for="comment">Write a comment</label>
@@ -40,7 +40,7 @@
         @endforeach
     </section>
     <section>
-        <form method="POST" action="/post">
+        <form method="POST" action="/posts">
             @csrf
             <label for="content">
                 <h1 class="m-0">Write a new post</h1>

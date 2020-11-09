@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +22,6 @@ Route::get('/', function () {
 Route::get('/login', [HomeController::class, 'showLogin']);
 Route::post('/login', [HomeController::class, 'doLogin']);
 
-Route::view('/posts', 'posts', ['posts' => array(
-    ['author' => 'John', 'content' => 'Hi Jane!', 'comments'=> array(
-        ['author' => 'Jane', 'content' => 'I love Computer Security']
-    )],
-    ['author' => 'Jane', 'content' => 'Hello, John!']
-)]);
+Route::get('/posts', [PostController::class, 'showPost']);
+Route::post('/posts', [PostController::class, 'doPost']);
+

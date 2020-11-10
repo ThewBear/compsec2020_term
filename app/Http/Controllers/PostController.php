@@ -12,9 +12,9 @@ use DB;
 class PostController extends Controller
 {
     public function doPost(Request $request) {
-        if (Gate::allows('do-post', $post)) {
+        if (Gate::allows('do-post')) {
             $post = new Post();
-            $post->user_id = session('id');
+            $post->user_id = auth()->user()->id;
             $post->content = $request->content;
 
             $post->save();

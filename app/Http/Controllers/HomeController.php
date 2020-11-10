@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function showLogin()
     {
-        if (session()->has('id') && session()->has('name')) {
+        if (auth()->check()) {
             return redirect('/posts');
         }
         return view('login');
@@ -34,13 +34,6 @@ class HomeController extends Controller
 
         // attempt to do the login
         if (Auth::attempt($userdata)) {
-            $userInstance = User::select(array('id', 'name'))->where('email', $userdata['email'])->first();
-            $request->session()->put('id', $userInstance['id']);
-            $request->session()->put('name', $userInstance['name']);
-            // validation successful!
-            // redirect them to the secure section or whatever
-            // return Redirect::to('secure');
-            // for now we'll just echo success (even though echoing in a controller is bad)
             return redirect('posts');
         } else {
 
@@ -53,12 +46,7 @@ class HomeController extends Controller
     }
     public function doLogout(Request $request)
     {
-        if (session()->has('id')) {
-            session()->pull('id');
-        }
-        if (session()->has('name')) {
-            session()->pull('name');
-        }
+        auth()->logout();
         return view('login');
     }
 }

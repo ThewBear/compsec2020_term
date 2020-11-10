@@ -27,11 +27,11 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('view-post', function ($user) {
-            return $user && $user->id && $user->role;
+            return auth()->check();
         });
 
-        Gate::define('do-post', function ($user, $post) {
-            return $user && $user->id && $post->user_id && $user->role;
+        Gate::define('do-post', function ($user) {
+            return auth()->check();
         });
 
         Gate::define('update-post', function ($user, $post) {

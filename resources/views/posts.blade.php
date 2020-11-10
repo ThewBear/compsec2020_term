@@ -4,19 +4,19 @@
 
 @section('body')
 <div class="container">
-    <section>
+    <section class="text-right py-2">
         <a href="/logout">Log Out</a>
     </section>
     <section>
         <h1 class="my-4">All posts</h1>
-        <h2>Hello, {{session('name')}}! What's on your mind?</h2>
+        <h2>Hello, {{auth()->user()->name}}! What's on your mind?</h2>
         @foreach($posts as $post)
             <div class="row justify-content-center">
                 <div class="col-8 card my-2">
                     <div class="card-body">
                         <h3 class="card-title">{{ $post->user->name }}</h3>
                         <p class="card-text">{{ $post['content'] }}</p>
-                        @if(session('id') === $post->user->id || $isAdmin)
+                        @if(auth()->user()->id === $post->user->id || $isAdmin)
                         <button class="btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#edit-post-{{$post->id}}" aria-expanded="false" aria-controls="collapseExample">
                             Edit this post
                         </button>
@@ -52,7 +52,7 @@
                                     <h5 class="d-inline">
                                         {{ $comment->user->name }}</h5>
                                     <p>{{ $comment['content'] }}</p>
-                                    @if(session('id') === $comment->user->id)
+                                    @if(auth()->user()->id === $comment->user->id)
                                     <div>
                                         <button class="btn btn-link btn-sm my-1" type="button" data-toggle="collapse" data-target="#edit-comment-{{$comment->id}}" aria-expanded="false" aria-controls="collapseExample">
                                             Edit this comment

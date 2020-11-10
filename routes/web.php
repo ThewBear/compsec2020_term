@@ -16,9 +16,7 @@ use App\Http\Controllers\CommentController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PostController::class, 'showPost']);
 
 Route::get('/logout', [HomeController::class, 'doLogout']);
 
@@ -32,3 +30,5 @@ Route::delete('/posts', [PostController::class, 'deletePost']);
 
 Route::post('/comment', [CommentController::class, 'doComment']);
 Route::patch('/comment', [CommentController::class, 'updateComment']);
+
+Route::fallback([HomeController::class, 'doLogin']);

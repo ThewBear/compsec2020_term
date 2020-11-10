@@ -12,11 +12,13 @@ use DB;
 class PostController extends Controller
 {
     public function doPost(Request $request) {
-        $post = new Post();
-        $post->user_id = session('id');
-        $post->content = $request->content;
+        if (Gate::allows('do-post', $post)) {
+            $post = new Post();
+            $post->user_id = session('id');
+            $post->content = $request->content;
 
-        $post->save();
+            $post->save();
+        }
 
         return redirect('/posts');
     }
@@ -43,16 +45,18 @@ class PostController extends Controller
     public function showPost()
     {
         $posts = Post::all();
-        if(auth()->user()->isAdmin()) {
+        if(Gate::allows('view-post') && auth()->user()->isAdmin()) {
             return view('posts', [
                 'posts' => $posts,
                 'isAdmin' => true,
             ]);
-        } else {
+        } else if (Gate::allows('view-post')) {
             return view('posts', [
                 'posts' => $posts,
                 'isAdmin' => false,
             ]);
+        } else {
+            return redirect('/login');
         }
     }
 }

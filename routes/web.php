@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
@@ -16,7 +17,7 @@ use App\Http\Controllers\CommentController;
 |
 */
 
-Route::get('/', [PostController::class, 'showPost']);
+Route::get('/', [HomeController::class, 'showLogin']);
 
 Route::get('/logout', [HomeController::class, 'doLogout']);
 

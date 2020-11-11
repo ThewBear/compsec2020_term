@@ -43,7 +43,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('do-comment', function ($user) {
-            return $user && $user->id && $user->role;
+            return auth()->check();
         });
 
         Gate::define('update-comment', function ($user, $comment) {

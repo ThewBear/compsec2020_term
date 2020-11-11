@@ -12,7 +12,7 @@ class CommentController extends Controller
         if (Gate::allows('do-comment')) {
             $comment = new Comment();
             $comment->content = $request->content;
-            $comment->user_id = auth()-user()->id;
+            $comment->user_id = auth()->user()->id;
             $comment->post_id = $request->post_id;
 
             $comment->save();

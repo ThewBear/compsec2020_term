@@ -36,6 +36,10 @@ class PostController extends Controller
     public function deletePost(Request $request) {
         $post = Post::findOrFail($request->id);
         if (Gate::allows('delete-post', $post)) {
+            // Delete post's comments before delete the post
+            foreach ($post->comments as $comment) {
+                $comment->delete();
+            }
             $post->delete();
         }
 

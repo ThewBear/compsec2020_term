@@ -1,3 +1,24 @@
+# How to run
+1. clone this repositoy <br>
+``cp .env.example .env``<br>
+``sudo docker-compose build app``<br>
+``sudo docker-compose up -d``<br>
+``sudo docker-compose exec app composer install``<br>
+2. after the installation completes<br>
+`sudo docker-compose exec app php artisan key:generate`<br>
+3. then<br>
+`sudo docker-compose exec app php artisan db:wipe`<br>
+4. and finally<br>
+`sudo docker-compose exec app php artisan migrate --seed`<br>
+
+# User and Password
+*ADMIN*<br>
+``admin@gmail.com``<br>
+``admin``<br>
+*User*<br>
+``user@gmail.com``<br>
+``user``
+<br><br>
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
